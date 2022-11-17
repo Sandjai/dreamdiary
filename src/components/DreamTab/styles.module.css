@@ -1,0 +1,8 @@
+.root {
+    text-decoration: none;
+    color: black;
+}
+
+.active {
+    color: #e18800;
+}
