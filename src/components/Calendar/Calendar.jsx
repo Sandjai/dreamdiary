@@ -2,8 +2,11 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CalendarSlice } from "../../store/calendar";
+import { DreamsPageSlice } from "../../store/dreamspage";
 import { DreamSlice } from "../../store/dream";
-import { selectDreamsDate } from "../../store/dream/selectors";
+import { selectDate } from "../../store/dreamspage/selectors";
+
+import { selectDreamsByDate } from "../../store/dream/selectors";
 import styles from "./styles.module.css";
 import { formatDate } from "../utils/formatDate";
 import classnames from "classnames";
@@ -16,20 +19,29 @@ import { months } from "../../constants/ui";
 import { DateContext } from "../../contexts/DateContext";
 import { Dream } from "../Dream/Dream";
 
-export const Calendar = ({ date, className }) => {
-  const time = useSelector((state) => selectDreamsDate(state));
+export const Calendar = ({ className, dreamid, setdreamid }) => {
+  const time = useSelector((state) => selectDate(state));
+
+  const firstID = useSelector((state) =>
+    selectDreamsByDate(state, {
+      datestamp: time,
+    })
+  )[0]?.[0];
+
+  useEffect(() => {
+    setdreamid(firstID);
+  }, [firstID]);
+
   const dispatch = useDispatch();
 
-  const [chosenDate, setChosenDate] = useState();
-
-  const formattedDate = formatDate(new Date(date), { dateStyle: "short" });
+  const formattedDate = formatDate(new Date(time), { dateStyle: "short" });
 
   const changeTime = (time) => {
     time = new Date(time).getTime();
-    dispatch(
+    /*   dispatch(
       DreamSlice.actions.changeTime({ timestamp: time, selectedID: null })
-    );
-    dispatch(CalendarSlice.actions.changeTime(time));
+    ); */
+    dispatch(DreamsPageSlice.actions.changeDate(time));
   };
 
   return (
@@ -67,7 +79,8 @@ export const Calendar = ({ date, className }) => {
             <div
               onClick={(event) => {
                 changeTime(new Date(event.target.dataset.value).getTime());
-                setChosenDate(new Date(event.target.dataset.value).getTime());
+
+                //setChosenDate(new Date(event.target.dataset.value).getTime());
               }}
               className={styles.rangepicker__dateGrid}
             >

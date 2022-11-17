@@ -29,10 +29,6 @@ export const DreamSlice = createSlice({
             state.status = LoadingStatuses.failed;
           },
 
-          changeTime: (state, action) => { 
-            state.timestamp = (action?.payload.timestamp); 
-            state.selectedID = (action?.payload.selectedID);              
-          },
 
 
     }

@@ -11,12 +11,10 @@ export const selectDreamsDate = (state) => selectDreamModule(state).timestamp;
 
 export const selectDreams = (state, {date}) => Object.values(selectDreamsByDate(state, {datestamp: new Date(date)}));
 
-export const selectSelectedDreamID = (state) => selectDreamModule(state).selectedDream;
-
 
 export const selectDreamsNames = (state, {date}) => (Object.values(selectDreamsByDate(state, {date}))).map((item)=>item.name);
 
-export const selectDreamByID = (state,  {dreamID} ) => selectDreamModule(state).entities[dreamID];
+export const selectDreamByID = (state,  {dreamid} ) => selectDreamModule(state).entities[dreamid];
 
 export const selectDreamsByDate = (state, {datestamp}) => {
 
@@ -24,8 +22,7 @@ export const selectDreamsByDate = (state, {datestamp}) => {
     
         new Date(datestamp).getDate() === new Date(val.time).getDate() &&
         new Date(datestamp).getMonth() === new Date(val.time).getMonth() &&
-        new Date(datestamp).getFullYear() === new Date(val.time).getFullYear())
-    
+        new Date(datestamp).getFullYear() === new Date(val.time).getFullYear())    
     
     });
     
@@ -34,9 +31,9 @@ export const selectDreamsByDate = (state, {datestamp}) => {
 
 
 
-export const selectDreamNameByID = (state,  {dreamID} ) => selectDreamModule(state).entities[dreamID].name;
+export const selectDreamNameByID = (state,  {dreamid} ) => selectDreamModule(state).entities[dreamid].name;
 
-export const selectDreamDescriptionByID = (state,  {dreamID} ) => selectDreamModule(state).entities?.[dreamID]?.description;
+export const selectDreamDescriptionByID = (state,  {dreamid} ) => selectDreamModule(state).entities?.[dreamid]?.description;
 
 export const selectDreamsLoading = (state) => (selectDreamModule(state)?.status ===  LoadingStatuses.inProgress) ? true : false;
 

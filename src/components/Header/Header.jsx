@@ -3,7 +3,7 @@ import classnames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useContext, useState } from "react";
 import { Button } from "../Button/Button";
-import { selectDreamsDate } from "../../store/dream/selectors";
+import { selectDate, selectID } from "../../store/dreamspage/selectors";
 import { formatDate } from "../utils/formatDate";
 import {
   selectDreamsIDs,
@@ -18,17 +18,16 @@ import { DateContext } from "../../contexts/DateContext";
 export const Header = ({
   children,
   className,
-  dreamID,
-  setDreamID,
+  dreamid,
+  setdreamid,
   onClick,
 }) => {
   //const date = useContext(DateContext);
 
-  let time0 = useContext(DateContext);
-  const date = new Date("Sun Nov 06 2022 10:01:16 GMT+0400").getTime();
-  const time = useSelector((state) => selectDreamsDate(state));
+  const time = useSelector((state) => selectDate(state));
+  const ID = useSelector((state) => selectID(state));
 
-  /* if (activedreamID === null)
+  /* if (activedreamid === null)
     return (
       <div>
         <h2>Добавить сон</h2>
@@ -40,7 +39,7 @@ export const Header = ({
         Список снов на {formatDate(new Date(time), { dateStyle: "long" })}
       </h2>
 
-      <DreamTabs dreamID={dreamID} setDreamID={setDreamID} />
+      <DreamTabs dreamid={dreamid} setdreamid={setdreamid} />
 
       {children}
     </div>

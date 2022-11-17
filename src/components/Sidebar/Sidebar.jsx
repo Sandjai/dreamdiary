@@ -6,14 +6,18 @@ import logo from "../../logo.png";
 import styles from "./styles.module.css";
 import classnames from "classnames";
 
-export const Sidebar = ({ className }) => {
+export const Sidebar = ({ className, dreamid, setdreamid }) => {
   return (
     <div className={classnames(className, styles.root)}>
       <h1>Приснилось?</h1>
       <img src={logo} className={styles.logo} alt="logo" />
 
       <div className="calendar">
-        <Calendar date={Date.now()}></Calendar>
+        <Calendar
+          dreamid={dreamid}
+          setdreamid={setdreamid}
+          date={Date.now()}
+        ></Calendar>
       </div>
       <div className="tags">
         <Tags></Tags>

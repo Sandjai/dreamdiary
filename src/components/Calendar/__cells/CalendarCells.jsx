@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import classnames from "classnames";
 import { CalendarCell } from "../__cell/CalendarCell";
 import { selectDreamsDate } from "../../../store/dream/selectors";
-import { selectedDate } from "../../../store/calendar/selectors";
+import { selectDate } from "../../../store/dreamspage/selectors";
 export const CalendarCells = ({ className }) => {
-  let time = useSelector(selectedDate);
+  let time = useSelector(selectDate);
   let date = new Date(time);
 
   let days = [];

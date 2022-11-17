@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import { useDispatch } from "react-redux";
+import { selectDate, selectID } from "../../store/dreamspage/selectors.js";
 import {
   selectDreamDescriptionByID,
   selectDreamsDate,
@@ -12,15 +13,15 @@ import { formatDate } from "../utils/formatDate";
 import { useEffect } from "react";
 import { DreamSlice } from "../../store/dream";
 
-export const Dream = ({ dreamID }) => {
+export const Dream = ({ dreamid, setdreamid }) => {
   const dreamDescription = useSelector((state) =>
-    selectDreamDescriptionByID(state, { dreamID })
+    selectDreamDescriptionByID(state, { dreamid })
   );
 
   //let date = useSelector((state) => selectDreamsDate(state));
-  let date = useSelector((state) => selectDreamsDate(state));
+  let date = useSelector((state) => selectDate(state));
 
-  if (!dreamID) {
+  if (!dreamid) {
     return (
       <div className={styles.root}>
         На {formatDate(new Date(date), { dateStyle: "long" })} снов пока нет

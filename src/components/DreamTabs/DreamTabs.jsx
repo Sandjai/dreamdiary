@@ -1,18 +1,21 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+
+import { selectDate } from "../../store/dreamspage/selectors";
 import {
   selectDreams,
   selectDreamsIDs,
-  selectdreamIDsFilteredByName,
+  selectdreamidsFilteredByName,
   selectDreamsDate,
   selectDreamsByDate,
 } from "../../store/dream/selectors";
 import { DreamTab } from "../DreamTab/DreamTab";
 import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
-export const DreamTabs = ({ dreamID, setDreamID }) => {
-  const time = useSelector((state) => selectDreamsDate(state));
-
+export const DreamTabs = ({ dreamid, setdreamid }) => {
+  const time = useSelector(selectDate);
+  const dispatch = useDispatch();
   const dreams = useSelector((state) =>
     selectDreamsByDate(state, {
       datestamp: new Date(time).getTime(),
@@ -23,11 +26,11 @@ export const DreamTabs = ({ dreamID, setDreamID }) => {
     <div>
       {dreams.map(([key, val], index) => (
         <DreamTab
-          selectedDreamID={dreamID}
-          setDreamID={setDreamID}
+          selecteddreamid={dreamid}
+          setdreamid={setdreamid}
           key={key}
           index={index}
-          dreamID={key}
+          dreamid={key}
         />
       ))}
     </div>

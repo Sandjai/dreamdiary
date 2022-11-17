@@ -7,15 +7,11 @@ import { store } from "./store";
 import { useState } from "react";
 import { DateContext } from "./contexts/DateContext";
 
-import { Layout } from "./components/Layout/Layout";
-
 export const App = () => {
   return (
     <div>
       <Provider store={store}>
-        <Layout>
-          <DreamsPage />
-        </Layout>
+        <DreamsPage />
       </Provider>
     </div>
   );

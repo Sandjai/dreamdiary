@@ -2,7 +2,7 @@ import { createSlice, createAction } from "@reduxjs/toolkit";
 import { LoadingStatuses } from "../constants/loadingStatuses";
 
 const initialState = {
-  selectedDate: Date.now(),
+  
 };
 
 export const CalendarSlice = createSlice({
@@ -10,10 +10,7 @@ export const CalendarSlice = createSlice({
   initialState,
   reducers: { 
 
-    changeTime: (state, action) => {                
-      state.selectedDate = (action?.payload || state.selectedDate);
-     
-    },
+
 
  
 
