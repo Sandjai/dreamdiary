@@ -1,30 +1,21 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectDreamByID } from "../../store/dream/selectors";
-import { DreamsPageSlice } from "../../store/dreamspage/index";
-
-import {
-  selectID,
-  selectate,
-  selectType,
-} from "../../store/dreamspage/selectors";
-
 import { NavLink } from "react-router-dom";
 import classnames from "classnames";
 import styles from "./styles.module.css";
-import { Button } from "../Button/Button";
 
-export const DreamTab = ({ dreamid, setdreamid, selecteddreamid }) => {
-  const dispatch = useDispatch();
-
+export const DreamTab = ({ dreamid }) => {
   return (
-    <Button
-      key={dreamid}
-      selectedIndex={selecteddreamid}
+    <NavLink
+      to={dreamid}
       onClick={() => {
-        setdreamid(dreamid);
+        console.log("setDreamID");
+      }}
+      className={({ isActive }) => {
+        return classnames(styles.root, {
+          [styles.active]: isActive,
+        });
       }}
     >
       {dreamid}
-    </Button>
+    </NavLink>
   );
 };

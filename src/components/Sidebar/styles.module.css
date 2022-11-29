@@ -23,6 +23,11 @@ h1 {
   max-width: 150px;
   width: 100%;
 }
+
+.tags {
+  margin-top: 5rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .logo {
     animation: logo-spin infinite 200s linear;

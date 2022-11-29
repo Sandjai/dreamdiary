@@ -1,0 +1,35 @@
+.root {
+}
+
+.hero {
+  background-color: var(--green);
+}
+
+.hero h1 {
+  margin-top: 2rem;
+  color: var(--white);
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-rows: 200px 1fr;
+}
+
+.content {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-rows: minmax(100vh, auto);
+}
+
+.form {
+  margin-top: 3rem;
+}
+
+.form label {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.form button {
+  margin-top: 1rem;
+}

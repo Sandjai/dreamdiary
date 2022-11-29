@@ -1,6 +1,10 @@
 .root {
 }
 
+a {
+  text-decoration: none;
+}
+
 .rangepicker__cell {
   cursor: pointer;
 }
@@ -14,7 +18,7 @@
   color: var(--white);
   font-weight: 400;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 30px;
   margin-top: 5px;
 }
 

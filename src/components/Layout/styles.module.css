@@ -1,0 +1,6 @@
+.root {
+  display: grid;
+  grid-template-rows: minmax(100vh, auto);
+  grid-template-columns: 300px 1fr;
+  text-align: center;
+}

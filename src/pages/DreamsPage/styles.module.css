@@ -1,18 +1,15 @@
-.contentWrapper {
-  display: grid;
-  grid-template-rows: 200px 1fr 80px;
-}
-
-.root {
-  display: grid;
-  grid-template-rows: minmax(100vh, auto);
-  grid-template-columns: 300px 1fr;
-  text-align: center;
-}
-
 .content,
 .footer {
   color: #e5e3e4;
+}
+
+.footer {
+  background-color: #469597;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-rows: 200px 2fr 1fr 80px;
 }
 
 .content {
@@ -21,6 +18,9 @@
   grid-template-rows: minmax(100vh, auto);
 }
 
-.footer {
-  background-color: #469597;
+.mainBtn {
+  background-color: var(--dark-green);
+  border: 1px solid var(--pink);
+  margin-left: auto;
+  margin-right: auto;
 }

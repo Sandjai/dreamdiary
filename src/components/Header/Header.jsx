@@ -1,45 +1,37 @@
 import styles from "./styles.module.css";
 import classnames from "classnames";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useContext, useState } from "react";
-import { Button } from "../Button/Button";
-import { selectDate, selectID } from "../../store/dreamspage/selectors";
-import { formatDate } from "../utils/formatDate";
-import {
-  selectDreamsIDs,
-  selectDreamsByDate,
-  selectDreamByID,
-  selectDreams,
-} from "../../store/dream/selectors";
-import { DreamTabs } from "../DreamTabs/DreamTabs";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
-import { DateContext } from "../../contexts/DateContext";
+import { formatDate } from "../utils/formatDate";
+
+import { DreamTabs } from "../DreamTabs/DreamTabs";
+import { CalendarSlice } from "../../store/calendar";
+
+import { useParams } from "react-router-dom";
 
 export const Header = ({
   children,
   className,
   dreamid,
-  setdreamid,
+
   onClick,
 }) => {
-  //const date = useContext(DateContext);
+  const { datestring } = useParams();
 
-  const time = useSelector((state) => selectDate(state));
-  const ID = useSelector((state) => selectID(state));
+  const dispatch = useDispatch();
 
-  /* if (activedreamid === null)
-    return (
-      <div>
-        <h2>Добавить сон</h2>
-      </div>
-    ); */
+  useEffect(() => {
+    dispatch(CalendarSlice.actions.changeDate(datestring));
+  }, [datestring]);
+
   return (
     <div onClick={onClick} className={classnames(styles.root, className)}>
       <h2>
-        Список снов на {formatDate(new Date(time), { dateStyle: "long" })}
+        Список снов на {formatDate(new Date(datestring), { dateStyle: "long" })}
       </h2>
 
-      <DreamTabs dreamid={dreamid} setdreamid={setdreamid} />
+      <DreamTabs dreamid={dreamid} />
 
       {children}
     </div>

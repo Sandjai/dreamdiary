@@ -1,25 +1,29 @@
 import styles from "./styles.module.css";
 import { useSelector } from "react-redux";
-
-import { selectDate } from "../../../store/dreamspage/selectors";
-import {
-  selectDreamsDate,
-  selectDreamsByDate,
-} from "../../../store/dream/selectors";
+import { Link } from "react-router-dom";
+import { selectDate } from "../../../store/calendar/selectors";
+import { selectDreamsByDate } from "../../../store/calendar/selectors";
 
 import { selectedDate } from "../../../store/calendar/selectors";
 
 import classnames from "classnames";
 
-export const CalendarCell = ({ time, className, children, startIndex }) => {
+export const CalendarCell = ({
+  selectedDate,
+  datestring,
+  className,
+  children,
+  startIndex,
+}) => {
   const ifHaveDreams = useSelector((state) =>
-    selectDreamsByDate(state, { datestamp: time })
+    selectDreamsByDate(state, { datestamp: datestring })
   ).length;
 
-  let selectedTime = useSelector(selectDate);
+  //let selectedTime = useSelector(selectDate);
 
   return (
-    <button
+    <Link
+      to={datestring}
       style={{ "--start-from": startIndex }}
       className={classnames(
         styles.root,
@@ -30,13 +34,16 @@ export const CalendarCell = ({ time, className, children, startIndex }) => {
         },
         {
           [styles.active]:
-            new Date(selectedTime).getDate() === new Date(time).getDate(),
+            new Date(datestring).getDate() ===
+              new Date(selectedDate).getDate() &&
+            new Date(datestring).getMonth() ===
+              new Date(selectedDate).getMonth() &&
+            new Date(datestring).getYear() === new Date(selectedDate).getYear(),
         }
       )}
-      type="button"
-      data-value={new Date(time).toISOString()}
+      data-value={datestring}
     >
       {children}
-    </button>
+    </Link>
   );
 };

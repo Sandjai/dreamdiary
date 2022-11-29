@@ -2,43 +2,41 @@ import { Dream } from "../../components/Dream/Dream";
 import { Button } from "../../components/Button/Button";
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
-import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectDreamsIDs,
   selectDreamsEntities,
-  selectDreamsDate,
   selectDreamsByDate,
   selectDreamsLoading,
-} from "../../store/dream/selectors.js";
+} from "../../store/calendar/selectors.js";
 
-import { selectDate } from "../../store/dreamspage/selectors.js";
+import { selectDate } from "../../store/calendar/selectors.js";
 import { useEffect } from "react";
-import { loadDreamsIfNotExist } from "../../store/dream/middlewares/loadDreamsIfNotExist";
+
 import { useContext } from "react";
 import { DateContext } from "../../contexts/DateContext";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { SIZES } from "../../constants/ui";
 
 export const DreamsPage = () => {
-  useEffect(() => {
-    dispatch(loadDreamsIfNotExist);
-  }, []);
+  const { datestring } = useParams();
 
+  const date = new Date(datestring);
+  const navigate = useNavigate();
   const dreamsEntities = useSelector(selectDreamsEntities);
 
   const dreamsDate = useSelector(selectDate);
 
   const firstID = useSelector((state) =>
     selectDreamsByDate(state, {
-      datestamp: dreamsDate,
+      datestamp: date,
     })
   )[0]?.[0];
 
   const dispatch = useDispatch();
-
-  let [dreamid, setdreamid] = useState(firstID);
 
   const isLoading = useSelector(selectDreamsLoading);
 
@@ -53,13 +51,20 @@ export const DreamsPage = () => {
   return (
     <>
       <div className={styles.root}>
-        <Sidebar dreamid={dreamid} setdreamid={setdreamid}></Sidebar>
-
         <div className={styles.content}>
           <div className={styles.contentWrapper}>
-            <Header dreamid={dreamid} setdreamid={setdreamid} />
-            <Dream dreamid={dreamid} setdreamid={setdreamid} />
-            <Footer />
+            <Header />
+            <Dream dreamid={firstID} />
+            <Button
+              onClick={() => {
+                navigate("/newDream");
+              }}
+              size={SIZES.l}
+              className={styles.mainBtn}
+            >
+              Добавить сон
+            </Button>
+            <Footer>{datestring}</Footer>
           </div>
         </div>
       </div>
