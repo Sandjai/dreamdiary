@@ -1,6 +1,9 @@
 import styles from "./styles.module.css";
 
-import { selectDreamDescriptionByID } from "../../store/calendar/selectors.js";
+import {
+  selectDreamDescriptionByID,
+  selectDreamTypeByID,
+} from "../../store/calendar/selectors.js";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -13,6 +16,10 @@ export const Dream = () => {
     selectDreamDescriptionByID(state, { dreamid })
   );
 
+  const dreamTypeById = useSelector((state) =>
+    selectDreamTypeByID(state, { dreamid })
+  );
+
   if (!dreamid) {
     return (
       <div className={styles.root}>
@@ -22,5 +29,14 @@ export const Dream = () => {
     );
   }
 
-  return <div className={styles.root}>{dreamDescription}</div>;
+  return (
+    <div>
+      <div className={styles.root}>{dreamDescription}</div>;
+      <div>
+        <p className={styles.type}>
+          <i>Тип: {dreamTypeById}</i>
+        </p>
+      </div>
+    </div>
+  );
 };

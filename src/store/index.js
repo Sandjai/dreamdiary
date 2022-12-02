@@ -4,9 +4,11 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { CalendarSlice } from "./calendar"
 
+
 const rootReducer = combineReducers({
   
     calendar: CalendarSlice.reducer,
+  
    
 })
 

@@ -14,17 +14,9 @@ export const Header = ({
   children,
   className,
   dreamid,
-
+  datestring,
   onClick,
 }) => {
-  const { datestring } = useParams();
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(CalendarSlice.actions.changeDate(datestring));
-  }, [datestring]);
-
   return (
     <div onClick={onClick} className={classnames(styles.root, className)}>
       <h2>

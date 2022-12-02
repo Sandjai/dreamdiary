@@ -6,15 +6,16 @@ export const selectCalendarModule = (state) => state.calendar;
 
 export const selectDreamsEntities = (state) => selectCalendarModule(state).entities;
 
-
+export const selectDreamsDate = (state) => selectCalendarModule(state).timestamp;
 
 
 export const selectDreams = (state, {date}) => Object.values(selectDreamsByDate(state, {datestamp: new Date(date)}));
 
 
-export const selectDreamsNames = (state, {date}) => (Object.values(selectDreamsByDate(state, {date}))).map((item)=>item.name);
+//export const selectDreamsNames = (state, {date}) => (Object.values(selectDreamsByDate(state, {date}))).map((item)=>item.name);
+export const selectDreamNameById = (state, {dreamid}) => selectDreamsEntities(state)[dreamid]['name'];
 
-//export const selectDreamByID = (state,  {dreamid} ) => selectCalendarModule(state).entities[dreamid];
+export const selectDreamByID = (state,  {dreamid} ) => selectCalendarModule(state).entities[dreamid];
 
 export const selectDreamsByDate = (state, {datestamp}) => {
 
@@ -29,9 +30,20 @@ export const selectDreamsByDate = (state, {datestamp}) => {
     }
 
 
-//export const selectDreamNameByID = (state,  {dreamid} ) => selectCalendarModule(state).entities[dreamid].name;
+    export const selectMonths = (state, monthYear) => { if (!monthYear) {
+        return state.months;
+    } else {
+        return selectCalendarModule(state).months.includes(monthYear);
+    }
+}
+
+export const selectDreamNameByID = (state,  {dreamid} ) => selectCalendarModule(state).entities[dreamid].name;
 
 export const selectDreamDescriptionByID = (state,  {dreamid} ) => selectCalendarModule(state).entities?.[dreamid]?.description;
+
+export const selectDreamTypeByID = (state,  {dreamid} ) => selectCalendarModule(state).entities?.[dreamid]?.type;
+
+export const selectAllTypes = (state) => selectCalendarModule(state).allTypes;
 
 export const selectDreamsLoading = (state) => (selectCalendarModule(state)?.status ===  LoadingStatuses.inProgress) ? true : false;
 

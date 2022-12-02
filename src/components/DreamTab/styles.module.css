@@ -1,14 +1,29 @@
-.root {
-  text-decoration: none;
+.active {
   color: var(--black);
-  min-width: 25px;
-  border: 1px solid var(--black);
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 5px;
+
+  padding: 11px;
 }
 
-.active {
-  color: var(--white);
+.navlink.active {
   background-color: var(--pink);
+  border: 2px solid var(--pink);
+}
+
+.navlink:active {
+  color: var(--black);
+}
+
+.navlink:hover {
+  background-color: var(--pink);
+}
+
+.navlink {
+  border-radius: 7px;
+  cursor: pointer;
+
+  min-width: 25px;
+  border: 2px solid var(--white);
+  border-radius: 4px;
+  color: var(--white);
+  padding: 7px 25px;
 }

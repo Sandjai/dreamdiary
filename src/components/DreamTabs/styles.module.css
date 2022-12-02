@@ -1,0 +1,23 @@
+.dreamtabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .navlinkContainer:not(:nth-child(1)) {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navlinkContainer:not(:nth-child(1)) {
+    margin-top: 30px;
+    flex-direction: column;
+  }
+}
+
+.navlinkContainer {
+  margin: 20px 10px 10px 10px;
+}

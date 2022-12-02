@@ -1,11 +1,15 @@
-.root {
+.button {
   border-radius: 7px;
-  cursor: pointer;
-  color: var(--white);
+  padding: 5px;
+  text-decoration: none;
+  border: 1px solid var(--black);
+  border-radius: 4px;
+  background-color: transparent;
 }
 
-.root:hover {
+.button:hover {
   background-color: var(--pink);
+  cursor: pointer;
 }
 
 .l {
@@ -14,7 +18,8 @@
   min-width: 30px;
   line-height: 20px;
   height: 40px;
-  width: 50%;
+  width: 40%;
+  box-shadow: 1px 1px 5px var(--black);
 }
 .m {
   font-size: 16px;

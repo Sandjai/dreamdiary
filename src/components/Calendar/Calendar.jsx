@@ -13,37 +13,42 @@ import { loadDreamsIfNotExist } from "../../store/calendar/middlewares/loadDream
 
 import { CalendarCells } from "./__cells/CalendarCells";
 
-import { months } from "../../constants/ui";
+import { monthsInRU } from "../../constants/ui";
+import { useCallback } from "react";
 
 export const Calendar = ({ className }) => {
   const selectedDate = useSelector((state) => selectDate(state));
+  const dispatch = useDispatch();
+
+  const month = new Date(selectedDate).getMonth() + 1;
+  const year = new Date(selectedDate).getFullYear();
 
   useEffect(() => {
-    dispatch(loadDreamsIfNotExist);
-  }, []);
+    dispatch(loadDreamsIfNotExist(month, year));
+  }, [month]);
 
-  const dispatch = useDispatch();
   const refToDate = useRef(
     formatDate(new Date(selectedDate), { dateStyle: "short" })
   );
 
   const changeDate = (date) => {
     date = new Date(date).getTime();
-
     dispatch(CalendarSlice.actions.changeDate(date));
   };
 
   return (
     <div>
-      Календарь сновидений
+      <h3> Календарь сновидений</h3>
       <div className={styles.rangepicker}>
-        <div className={styles.rangepicker__input} data-elem="input">
+        <div className={styles.refToDate}>
           <span>{refToDate.current}</span>
         </div>
-        <div className={styles.rangepicker__selector} data-elem="selector">
+        <div className={styles.rangepicker__selector}>
           <div
             className={styles.rangepicker__selector_control_left}
             onClick={() => {
+              dispatch(CalendarSlice.actions.addLoadedMonths(selectedDate));
+
               changeDate(
                 new Date(selectedDate).setMonth(
                   new Date(selectedDate).getMonth() - 1
@@ -54,6 +59,7 @@ export const Calendar = ({ className }) => {
           <div
             className={styles.rangepicker__selector_control_right}
             onClick={() => {
+              dispatch(CalendarSlice.actions.addLoadedMonths(selectedDate));
               changeDate(
                 new Date(selectedDate).setMonth(
                   new Date(selectedDate).getMonth() + 1
@@ -66,7 +72,7 @@ export const Calendar = ({ className }) => {
             <div className={styles.rangepicker__month_indicator}>
               <time dateTime={selectedDate}>
                 {
-                  months[
+                  monthsInRU[
                     formatDate(new Date(selectedDate).getMonth(), {
                       dateStyle: "short",
                     })
@@ -90,8 +96,6 @@ export const Calendar = ({ className }) => {
                   new Date(event.target.dataset.value),
                   { dateStyle: "short" }
                 );
-
-                //setChosenDate(new Date(event.target.dataset.value).getTime());
               }}
               className={styles.rangepicker__dateGrid}
             >

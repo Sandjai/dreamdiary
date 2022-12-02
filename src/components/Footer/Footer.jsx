@@ -5,7 +5,8 @@ export const Footer = ({ children, className, onClick }) => {
   return (
     <div onClick={onClick} className={classnames(styles.root, className)}>
       Footer
-      {children}
+      <br />
+      {/*children*/}
     </div>
   );
 };

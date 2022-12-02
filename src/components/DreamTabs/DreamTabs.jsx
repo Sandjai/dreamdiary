@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { selectDate } from "../../store/calendar/selectors";
+import styles from "./styles.module.css";
+
 import { selectDreamsByDate } from "../../store/calendar/selectors";
 import { DreamTab } from "../DreamTab/DreamTab";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
@@ -23,16 +23,15 @@ export const DreamTabs = () => {
     navigate(`${selecteddreamid}`);
   }, [selecteddreamid]);
 
-  const dispatch = useDispatch();
-
   return (
-    <div>
+    <div className={styles.dreamtabs}>
       {dreams.map(([key, val], index) => (
         <DreamTab
           selecteddreamid={dreams[0][0]}
           key={key}
           index={index}
           dreamid={key}
+          className={styles.navlinkContainer}
         />
       ))}
     </div>

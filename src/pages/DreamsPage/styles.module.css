@@ -20,7 +20,11 @@
 
 .mainBtn {
   background-color: var(--dark-green);
-  border: 1px solid var(--pink);
+  border: 1px solid var(--green);
   margin-left: auto;
   margin-right: auto;
+  color: var(--white);
+}
+.mainBtn:hover {
+  border: 1px solid var(--pink);
 }

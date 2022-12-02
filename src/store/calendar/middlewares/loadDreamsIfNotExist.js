@@ -1,16 +1,30 @@
 import { normolize } from "../../utils/normolize";
-import { selectDreamsIDs } from "../selectors";
+import { selectDreamsIDs, selectMonths } from "../selectors";
 import {CalendarSlice} from "../index";
-import {LinksService} from "../../../services/links.service"
 
-export const loadDreamsIfNotExist = (dispatch, getState) => {
-    if (selectDreamsIDs(getState())?.length > 0) {
+import {LinksService} from "../../../services/links.service"
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+export const loadDreamsIfNotExist =(month, year) =>  (dispatch, getState) => {
+
+
+
+    if (selectMonths(getState(), `${month}-${year}`)) {
+
         return;
       }
       
       dispatch(CalendarSlice.actions.startLoading());
 
-  LinksService.getLinks((notes) => {  
-    dispatch(CalendarSlice.actions.successLoading(normolize(notes)));
-  }, () => dispatch(CalendarSlice.actions.failLoading()));
+  LinksService.getData({
+    callbackSuccess: (notes) => {    
+    dispatch(CalendarSlice.actions.successLoading(normolize(notes, month, year)));
+
+  },
+    callbackFail: () => dispatch(CalendarSlice.actions.failLoading()),
+    month: month, 
+    year: year,
+  
+  })
 }

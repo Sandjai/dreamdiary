@@ -7,7 +7,7 @@ export const Button = ({ children, className, onClick, size = SIZES.m }) => {
     <button
       type="button"
       onClick={onClick}
-      className={classnames(styles.root, className, styles[size])}
+      className={classnames(styles.button, className, styles[size])}
     >
       {children}
     </button>
