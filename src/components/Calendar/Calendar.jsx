@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,37 +7,31 @@ import { CalendarSlice } from "../../store/calendar";
 import { selectDate } from "../../store/calendar/selectors";
 
 import styles from "./styles.module.css";
-import { formatDate } from "../utils/formatDate";
-
-import { loadDreamsIfNotExist } from "../../store/calendar/middlewares/loadDreamsIfNotExist";
+import { formatDate } from "../../utils/formatDate";
 
 import { CalendarCells } from "./__cells/CalendarCells";
 
 import { monthsInRU } from "../../constants/ui";
 import { useCallback } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { NoDreamsPage } from "../../pages/NoDreamsPage/NoDreamsPage";
 
-export const Calendar = ({ className }) => {
-  const selectedDate = useSelector((state) => selectDate(state));
+export const Calendar = ({ className, innerDate, setInnerDate }) => {
+  const { datestring } = useParams();
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const month = new Date(selectedDate).getMonth() + 1;
-  const year = new Date(selectedDate).getFullYear();
+  const date = datestring;
 
-  useEffect(() => {
-    dispatch(loadDreamsIfNotExist(month, year));
-  }, [month]);
-
-  const refToDate = useRef(
-    formatDate(new Date(selectedDate), { dateStyle: "short" })
-  );
+  const refToDate = useRef(formatDate(new Date(date), { dateStyle: "short" }));
 
   const changeDate = (date) => {
-    date = new Date(date).getTime();
-    dispatch(CalendarSlice.actions.changeDate(date));
+    setInnerDate(new Date(date));
   };
 
   return (
-    <div>
+    <div className={className}>
       <h3> Календарь сновидений</h3>
       <div className={styles.rangepicker}>
         <div className={styles.refToDate}>
@@ -47,33 +41,37 @@ export const Calendar = ({ className }) => {
           <div
             className={styles.rangepicker__selector_control_left}
             onClick={() => {
-              dispatch(CalendarSlice.actions.addLoadedMonths(selectedDate));
-
-              changeDate(
-                new Date(selectedDate).setMonth(
-                  new Date(selectedDate).getMonth() - 1
+              dispatch(
+                CalendarSlice.actions.addLoadedMonths(
+                  formatDate(new Date(innerDate), { dateStyle: "monthYear" })
                 )
+              );
+
+              setInnerDate(
+                new Date(innerDate.setMonth(innerDate.getMonth() - 1))
               );
             }}
           ></div>
           <div
             className={styles.rangepicker__selector_control_right}
             onClick={() => {
-              dispatch(CalendarSlice.actions.addLoadedMonths(selectedDate));
-              changeDate(
-                new Date(selectedDate).setMonth(
-                  new Date(selectedDate).getMonth() + 1
+              dispatch(
+                CalendarSlice.actions.addLoadedMonths(
+                  formatDate(new Date(innerDate), { dateStyle: "monthYear" })
                 )
+              );
+              setInnerDate(
+                new Date(innerDate.setMonth(innerDate.getMonth() + 1))
               );
             }}
           ></div>
 
           <div className={styles.rangepicker__calendar}>
             <div className={styles.rangepicker__month_indicator}>
-              <time dateTime={selectedDate}>
+              <time dateTime={datestring}>
                 {
                   monthsInRU[
-                    formatDate(new Date(selectedDate).getMonth(), {
+                    formatDate(new Date(innerDate).getMonth(), {
                       dateStyle: "short",
                     })
                   ]
@@ -91,7 +89,11 @@ export const Calendar = ({ className }) => {
             </div>
             <div
               onClick={(event) => {
+                if (event.target.dataset.value === undefined) {
+                  return;
+                }
                 changeDate(new Date(event.target.dataset.value).getTime());
+                dispatch(CalendarSlice.actions.changeDate(date));
                 refToDate.current = formatDate(
                   new Date(event.target.dataset.value),
                   { dateStyle: "short" }
@@ -99,7 +101,10 @@ export const Calendar = ({ className }) => {
               }}
               className={styles.rangepicker__dateGrid}
             >
-              <CalendarCells refToDate={refToDate.current}></CalendarCells>
+              <CalendarCells
+                innerDate={innerDate}
+                refToDate={refToDate.current}
+              ></CalendarCells>
             </div>
           </div>
         </div>

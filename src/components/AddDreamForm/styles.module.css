@@ -19,3 +19,15 @@ label {
   font-weight: 700;
   color: var(--dark-green);
 }
+
+input,
+select {
+  border: 2px solid var(--dark-green);
+  height: 1.9rem;
+}
+
+input,
+select,
+textarea {
+  border: 2px solid var(--dark-green);
+}

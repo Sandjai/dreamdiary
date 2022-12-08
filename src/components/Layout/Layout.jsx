@@ -1,11 +1,13 @@
-import { Sidebar } from "../../components/Sidebar/Sidebar";
+import { Notification } from "../Notification/Notification";
 import styles from "./styles.module.css";
 
 export const Layout = ({ children }) => {
   return (
-    <div className={styles.root}>
-      <Sidebar></Sidebar>
-      {children}
-    </div>
+    <>
+      <Notification></Notification>
+      <div className={styles.root}>
+        <div className={styles.layout}>{children}</div>
+      </div>
+    </>
   );
 };

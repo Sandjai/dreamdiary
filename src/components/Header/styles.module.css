@@ -1,6 +1,19 @@
-.root {
+.header {
+  background-color: var(--grey);
+  max-width: 100%;
+  width: 100%;
+  text-align: right;
+}
+
+.header * {
+  padding-right: 20px;
+}
+
+.hero {
+  height: auto;
   background-color: var(--green);
-  padding: 20px;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
 }
 
 .buttons {

@@ -2,7 +2,7 @@ import { LoadingStatuses } from "../constants/loadingStatuses";
 
 export const selectCalendarModule = (state) => state.calendar;
 
-
+export const ifHaveDreamsOnDate = (state, {date}) => Object.values(selectDreamsByDate(state, {datestamp: new Date(date)})).length !== 0;
 
 export const selectDreamsEntities = (state) => selectCalendarModule(state).entities;
 
@@ -43,7 +43,7 @@ export const selectDreamDescriptionByID = (state,  {dreamid} ) => selectCalendar
 
 export const selectDreamTypeByID = (state,  {dreamid} ) => selectCalendarModule(state).entities?.[dreamid]?.type;
 
-export const selectAllTypes = (state) => selectCalendarModule(state).allTypes;
+
 
 export const selectDreamsLoading = (state) => (selectCalendarModule(state)?.status ===  LoadingStatuses.inProgress) ? true : false;
 
@@ -53,5 +53,16 @@ export const selectDreamsLoading = (state) => (selectCalendarModule(state)?.stat
 
 export const selectDate = (state) => selectCalendarModule(state).date;
 
-export const selectDreamsIDs = (state) => selectCalendarModule(state).ids;
+export const selectDreamsIDs = (state,  {monthYear} ) => {
+
+    const ids = selectCalendarModule(state).ids
+    for (let item of ids ) {
+        if (item.hasOwnProperty(monthYear)) {
+            return item[monthYear];
+        }
+    }
+
+}
+
+
 

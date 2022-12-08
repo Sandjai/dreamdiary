@@ -27,12 +27,6 @@ const db = getDatabase(app);
 
 export class LinksService {
 
-  constructor (month, year) {
-    this.year=year;
-    this.month=month;
-
-  }
-  
 
     static _makeRequest(type, data, callbackSuccess, callbackFail, url, month, year) {
 
@@ -65,8 +59,7 @@ export class LinksService {
 
   set(ref(db, `users/${user}/dreams/${year}/${month+1}/` + newPostKey), data)
   .then(() => {  
-    //this._makeRequest('GET', undefined, ()=>{}, ()=>{}, `${`users/${user}/dreams/${year}/${month+1}/` + newPostKey}`)
-    callbackSuccess(newPostKey);
+        callbackSuccess(newPostKey);       
   })
   .catch((error) => {
     callbackFail(error);

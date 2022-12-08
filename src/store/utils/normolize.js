@@ -1,9 +1,6 @@
-export const normolize = (items, month, year) => ({
+export const normolize = (items, monthYear) => ({
     entities: items,
-    ids: Object.keys(items),
-    months: [`${month}-${year}`],
-    allTypes: Object.values(items).map((item) => item.type)
-
-
+    ids: [{[monthYear]: Object.keys(items)}],
+    months: monthYear,
     });
 

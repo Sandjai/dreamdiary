@@ -1,0 +1,41 @@
+.content,
+.footer {
+  color: #e5e3e4;
+}
+
+.footer {
+  background-color: #469597;
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+.content {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.root2 {
+  display: grid;
+  grid-template-rows: minmax(100vh, auto);
+  grid-template-columns: 300px 1fr;
+  text-align: center;
+}
+
+.hero {
+  height: auto;
+  background-color: var(--green);
+  padding-top: 2rem;
+}
+
+p {
+  color: var(--grey);
+}

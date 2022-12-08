@@ -4,8 +4,7 @@ import styles from "./styles.module.css";
 
 import { selectDreamsByDate } from "../../store/calendar/selectors";
 import { DreamTab } from "../DreamTab/DreamTab";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export const DreamTabs = () => {
   const { datestring } = useParams();
@@ -16,18 +15,10 @@ export const DreamTabs = () => {
     })
   );
 
-  const selecteddreamid = dreams?.[0]?.[0] || "";
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate(`${selecteddreamid}`);
-  }, [selecteddreamid]);
-
   return (
     <div className={styles.dreamtabs}>
       {dreams.map(([key, val], index) => (
         <DreamTab
-          selecteddreamid={dreams[0][0]}
           key={key}
           index={index}
           dreamid={key}

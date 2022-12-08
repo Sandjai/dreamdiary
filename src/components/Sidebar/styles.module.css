@@ -1,16 +1,13 @@
-.root {
+.sidebar {
   background-color: var(--light-grey);
   border: 1.5px solid var(--pink);
   box-shadow: -8px 5px 20px 0px;
   z-index: 9999;
+  overflow: hidden;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  padding: 15px 10px;
+h1 {
+  padding: 2rem 0px;
 }
 
 h1 {

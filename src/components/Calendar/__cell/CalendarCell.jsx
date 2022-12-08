@@ -1,8 +1,11 @@
 import styles from "./styles.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
-import { selectDreamsByDate } from "../../../store/calendar/selectors";
+import {
+  ifHaveDreamsOnDate,
+  selectDreamsByDate,
+} from "../../../store/calendar/selectors";
 import classnames from "classnames";
 
 export const CalendarCell = ({
@@ -13,12 +16,27 @@ export const CalendarCell = ({
   startIndex,
 }) => {
   const ifHaveDreams = useSelector((state) =>
+    ifHaveDreamsOnDate(state, { date: datestring })
+  );
+
+  const dreams = useSelector((state) =>
     selectDreamsByDate(state, { datestamp: datestring })
-  ).length;
+  );
+
+  const firstId = dreams?.[0]?.[0] || "nodream";
+
+  function isActive() {
+    return (
+      new Date(datestring).getDate() === new Date(selectedDate).getDate() &&
+      new Date(datestring).getMonth() === new Date(selectedDate).getMonth() &&
+      new Date(datestring).getFullYear() ===
+        new Date(selectedDate).getFullYear()
+    );
+  }
 
   return (
     <Link
-      to={datestring}
+      to={`/date/${datestring}/dream/${firstId}`}
       style={{ "--start-from": startIndex }}
       className={classnames(
         styles.root,
@@ -28,13 +46,7 @@ export const CalendarCell = ({
           [styles.haveDreams]: ifHaveDreams,
         },
         {
-          [styles.active]:
-            new Date(datestring).getDate() ===
-              new Date(selectedDate).getDate() &&
-            new Date(datestring).getMonth() ===
-              new Date(selectedDate).getMonth() &&
-            new Date(datestring).getFullYear() ===
-              new Date(selectedDate).getFullYear(),
+          [styles.active]: isActive(),
         }
       )}
       data-value={datestring}
