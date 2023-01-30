@@ -1,10 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { CalendarSlice } from "../../store/calendar";
-
-import { selectDate } from "../../store/calendar/selectors";
 
 import styles from "./styles.module.css";
 import { formatDate } from "../../utils/formatDate";
@@ -12,15 +9,13 @@ import { formatDate } from "../../utils/formatDate";
 import { CalendarCells } from "./__cells/CalendarCells";
 
 import { monthsInRU } from "../../constants/ui";
-import { useCallback } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NoDreamsPage } from "../../pages/NoDreamsPage/NoDreamsPage";
+
+import { useParams } from "react-router-dom";
 
 export const Calendar = ({ className, innerDate, setInnerDate }) => {
   const { datestring } = useParams();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const date = datestring;
 
