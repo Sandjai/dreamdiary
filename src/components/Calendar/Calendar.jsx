@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { CalendarSlice } from "../../store/calendar";
@@ -12,51 +12,65 @@ import { monthsInRU } from "../../constants/ui";
 
 import { useParams } from "react-router-dom";
 
-export const Calendar = ({ className, innerDate, setInnerDate }) => {
+export const Calendar = ({ className, activeMonth, setActiveMonth }) => {
   const { datestring } = useParams();
 
   const dispatch = useDispatch();
 
-  const date = datestring;
+  //formatDate(new Date(date), { dateStyle: "short" })
 
-  const refToDate = useRef(formatDate(new Date(date), { dateStyle: "short" }));
-
-  const changeDate = (date) => {
-    setInnerDate(new Date(date));
-  };
+  // const changeDate = (date) => {
+  //   setInnerDate(new Date(date));
+  // };
 
   return (
     <div className={className}>
       <h3> Календарь сновидений</h3>
       <div className={styles.rangepicker}>
-        <div className={styles.refToDate}>
-          <span>{refToDate.current}</span>
-        </div>
         <div className={styles.rangepicker__selector}>
           <div
             className={styles.rangepicker__selector_control_left}
             onClick={() => {
-              dispatch(
-                CalendarSlice.actions.addLoadedMonths(
-                  formatDate(new Date(innerDate), { dateStyle: "monthYear" })
-                )
+              const d1 = new Date(activeMonth).setMonth(
+                new Date(activeMonth).getMonth() - 1
               );
 
-              setInnerDate(
-                new Date(innerDate.setMonth(innerDate.getMonth() - 1))
+              let newDateString = formatDate(new Date(d1), {
+                dateStyle: "short",
+              })
+                .split(".")
+                .reverse()
+                .join("-");
+
+              setActiveMonth(newDateString);
+
+              dispatch(
+                CalendarSlice.actions.addLoadedMonths(
+                  formatDate(new Date(activeMonth), { dateStyle: "monthYear" })
+                )
               );
             }}
           ></div>
           <div
             className={styles.rangepicker__selector_control_right}
             onClick={() => {
+              const d1 = new Date(activeMonth).setMonth(
+                new Date(activeMonth).getMonth() + 1
+              );
+
+              let newDateString = formatDate(new Date(d1), {
+                dateStyle: "short",
+              })
+                .split(".")
+                .reverse()
+                .join("-");
+
+              setActiveMonth(newDateString);
+
               dispatch(
                 CalendarSlice.actions.addLoadedMonths(
-                  formatDate(new Date(innerDate), { dateStyle: "monthYear" })
+                  formatDate(new Date(activeMonth), { dateStyle: "monthYear" })
                 )
-              );
-              setInnerDate(
-                new Date(innerDate.setMonth(innerDate.getMonth() + 1))
               );
             }}
           ></div>
@@ -66,7 +80,7 @@ export const Calendar = ({ className, innerDate, setInnerDate }) => {
               <time dateTime={datestring}>
                 {
                   monthsInRU[
-                    formatDate(new Date(innerDate).getMonth(), {
+                    formatDate(new Date(activeMonth).getMonth(), {
                       dateStyle: "short",
                     })
                   ]
@@ -87,18 +101,18 @@ export const Calendar = ({ className, innerDate, setInnerDate }) => {
                 if (event.target.dataset.value === undefined) {
                   return;
                 }
-                changeDate(new Date(event.target.dataset.value).getTime());
-                dispatch(CalendarSlice.actions.changeDate(date));
-                refToDate.current = formatDate(
-                  new Date(event.target.dataset.value),
-                  { dateStyle: "short" }
+
+                dispatch(
+                  CalendarSlice.actions.addLoadedMonths(
+                    formatDate(new Date(datestring), { dateStyle: "monthYear" })
+                  )
                 );
               }}
               className={styles.rangepicker__dateGrid}
             >
               <CalendarCells
-                innerDate={innerDate}
-                refToDate={refToDate.current}
+                activeMonth={activeMonth}
+                setActiveMonth={setActiveMonth}
               ></CalendarCells>
             </div>
           </div>

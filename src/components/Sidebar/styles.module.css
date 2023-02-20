@@ -33,17 +33,15 @@ h3 {
   margin-top: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .logo {
-    animation: logo-spin infinite 200s linear;
-  }
+.burgerIcon {
+  text-align: right;
+  cursor: pointer;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.burgerIcon img {
+  width: 45px;
+}
+
+.isHidden {
+  display: none;
 }

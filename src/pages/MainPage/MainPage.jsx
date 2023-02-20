@@ -3,11 +3,12 @@ import { Footer } from "../../components/Footer/Footer";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { Outlet, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import classNames from "classnames";
 import styles from "./styles.module.css";
 import { Header } from "../../components/Header/Header";
 import { formatDate } from "../../utils/formatDate";
 import { DreamTabs } from "../../components/DreamTabs/DreamTabs";
+import { useRef, useState } from "react";
 
 export const MainPage = () => {
   const navigate = useNavigate();
@@ -44,10 +45,23 @@ export const MainPage = () => {
     }
   };
 
+  const [isOpen, setIsOpen] = useState(true);
+
+  function toggleSidebar() {
+    setIsOpen(!isOpen);
+  }
   return (
     <>
-      <div className={styles.contentWrapper}>
-        <Sidebar></Sidebar>
+      <div
+        className={classNames(
+          styles.contentWrapper,
+          { [styles.contentWrapper_narrow]: !isOpen },
+          {
+            [styles.contentWrapper_wide]: isOpen,
+          }
+        )}
+      >
+        <Sidebar onClick={toggleSidebar} isOpen={isOpen}></Sidebar>
         <div className={styles.main}>
           {getDefaultMessage()}
           <Outlet></Outlet>

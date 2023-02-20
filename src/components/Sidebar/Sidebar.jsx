@@ -9,35 +9,32 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDreamsIfNotExist } from "../../store/calendar/middlewares/loadDreamsIfNotExist.js";
 import { formatDate } from "../../utils/formatDate.js";
+import BurgerIcon from "../../images/Hamburger_menu.png";
+import classNames from "classnames";
 
-export const Sidebar = ({ className }) => {
+export const Sidebar = ({ className, onClick, isOpen }) => {
   const { datestring } = useParams();
 
   const dispatch = useDispatch();
-
-  const date = datestring;
-
-  const [innerDate, setInnerDate] = useState(new Date(date));
-  const monthYear = formatDate(new Date(innerDate), { dateStyle: "monthYear" });
-
+  const [activeMonth, setActiveMonth] = useState(datestring);
   useEffect(() => {
-    dispatch(loadDreamsIfNotExist(innerDate));
-  }, [monthYear]);
+    dispatch(loadDreamsIfNotExist(activeMonth));
+  }, [activeMonth]);
 
   return (
     <div className={classnames(className, styles.sidebar)}>
-      <h1>Приснилось?</h1>
-      <img src={logo} className={styles.logo} alt="logo" />
-
+      <div onClick={onClick} className={styles.burgerIcon}>
+        <img alt="Burger Icon" src={BurgerIcon}></img>
+      </div>
       <Calendar
-        innerDate={innerDate}
-        setInnerDate={setInnerDate}
-        className={styles.calendar}
+        activeMonth={activeMonth}
+        setActiveMonth={setActiveMonth}
+        className={classNames(styles.calendar, { [styles.isHidden]: !isOpen })}
       ></Calendar>
       <Tags
-        innerDate={innerDate}
-        setInnerDate={setInnerDate}
-        className={styles.tags}
+        className={classNames(styles.tags, { [styles.isHidden]: !isOpen })}
+        activeMonth={activeMonth}
+        setActiveMonth={setActiveMonth}
       ></Tags>
     </div>
   );

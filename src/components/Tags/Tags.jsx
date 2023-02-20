@@ -10,12 +10,10 @@ import { selectAllTypes } from "../../store/tags/selectors";
 import { formatDate } from "../../utils/formatDate";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const Tags = ({ className, innerDate }) => {
-  const date = innerDate;
-
+export const Tags = ({ className, activeMonth, setActiveMonth }) => {
   const navigate = useNavigate();
 
-  const monthYear = formatDate(new Date(innerDate), {
+  const monthYear = formatDate(new Date(activeMonth), {
     dateStyle: "monthYear",
   });
 
@@ -57,7 +55,7 @@ export const Tags = ({ className, innerDate }) => {
 
   const chosenMonth =
     monthsInRU[
-      formatDate(new Date(date).getMonth(), {
+      formatDate(new Date(activeMonth).getMonth(), {
         dateStyle: "short",
       })
     ];
@@ -67,8 +65,8 @@ export const Tags = ({ className, innerDate }) => {
       <div>
         <h3>
           Сны по типам за <br></br>
-          <time dateTime={date}>{chosenMonth} </time>
-          <time>{"(" + new Date(date).getFullYear() + " год)"}</time>:
+          <time dateTime={new Date(activeMonth)}>{chosenMonth} </time>
+          <time>{"(" + new Date(activeMonth).getFullYear() + " год)"}</time>:
         </h3>
 
         <Button

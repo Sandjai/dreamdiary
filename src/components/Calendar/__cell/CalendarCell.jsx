@@ -14,6 +14,7 @@ export const CalendarCell = ({
   className,
   children,
   startIndex,
+  setCalendarDate,
 }) => {
   const ifHaveDreams = useSelector((state) =>
     ifHaveDreamsOnDate(state, { date: datestring })
@@ -26,16 +27,12 @@ export const CalendarCell = ({
   const firstId = dreams?.[0]?.[0] || "nodream";
 
   function isActive() {
-    return (
-      new Date(datestring).getDate() === new Date(selectedDate).getDate() &&
-      new Date(datestring).getMonth() === new Date(selectedDate).getMonth() &&
-      new Date(datestring).getFullYear() ===
-        new Date(selectedDate).getFullYear()
-    );
+    return datestring === selectedDate;
   }
 
   return (
     <Link
+      onClick={() => setCalendarDate(datestring)}
       to={`/date/${datestring}/dream/${firstId}`}
       style={{ "--start-from": startIndex }}
       className={classnames(

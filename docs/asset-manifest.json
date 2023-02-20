@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8630dfb3.css",
+    "main.js": "/static/js/main.89bf6cf5.js",
+    "static/media/logo.png": "/static/media/logo.fe016eba65aa1398cbed.png",
+    "index.html": "/index.html",
+    "static/media/calendar-icon.svg": "/static/media/calendar-icon.335d4ee8b0ca3ca1e5d4.svg",
+    "static/media/angle-arrow-icon.svg": "/static/media/angle-arrow-icon.f2fc29de05738f63883d.svg",
+    "main.8630dfb3.css.map": "/static/css/main.8630dfb3.css.map",
+    "main.89bf6cf5.js.map": "/static/js/main.89bf6cf5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8630dfb3.css",
+    "static/js/main.89bf6cf5.js"
+  ]
+}
