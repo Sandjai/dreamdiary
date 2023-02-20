@@ -160,9 +160,7 @@ body {
 }
 .styles_refToDate__xi9vw {
   background-color: var(--white);
-  background: var(--white)
-    url(/dreamdiary/calendar-icon.335d4ee8b0ca3ca1e5d4.svg) 16px center
-    no-repeat;
+  background: var(--white) url(/calendar-icon.svg) 16px center no-repeat;
   background-size: 18px 18px;
   border: 1px solid var(--grey-light);
   border-radius: 4px;
@@ -219,8 +217,7 @@ body {
 }
 .styles_rangepicker__selector_control_left__ql1XR,
 .styles_rangepicker__selector_control_right__I1lAQ {
-  background: url(/dreamdiary/angle-arrow-icon.f2fc29de05738f63883d.svg) 0
-    no-repeat;
+  background: url(/angle-arrow-icon.svg) 0 no-repeat;
   background-size: 9px 13px;
   cursor: pointer;
   display: flex;
