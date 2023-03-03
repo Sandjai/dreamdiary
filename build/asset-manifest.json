@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/dreamdiary/static/css/main.83395e64.css",
-    "main.js": "/dreamdiary/static/js/main.f38bbd97.js",
-    "static/media/logo.png": "/dreamdiary/static/media/logo.fe016eba65aa1398cbed.png",
-    "index.html": "/dreamdiary/index.html",
-    "static/media/calendar-icon.svg": "/dreamdiary/static/media/calendar-icon.335d4ee8b0ca3ca1e5d4.svg",
-    "static/media/angle-arrow-icon.svg": "/dreamdiary/static/media/angle-arrow-icon.f2fc29de05738f63883d.svg",
-    "main.83395e64.css.map": "/dreamdiary/static/css/main.83395e64.css.map",
-    "main.f38bbd97.js.map": "/dreamdiary/static/js/main.f38bbd97.js.map"
+    "main.css": "/static/css/main.d4fd0482.css",
+    "main.js": "/static/js/main.55ded314.js",
+    "static/media/logo.png": "/static/media/logo.fe016eba65aa1398cbed.png",
+    "index.html": "/index.html",
+    "static/media/calendar-icon.svg": "/static/media/calendar-icon.335d4ee8b0ca3ca1e5d4.svg",
+    "static/media/angle-arrow-icon.svg": "/static/media/angle-arrow-icon.f2fc29de05738f63883d.svg",
+    "main.d4fd0482.css.map": "/static/css/main.d4fd0482.css.map",
+    "main.55ded314.js.map": "/static/js/main.55ded314.js.map"
   },
   "entrypoints": [
-    "static/css/main.83395e64.css",
-    "static/js/main.f38bbd97.js"
+    "static/css/main.d4fd0482.css",
+    "static/js/main.55ded314.js"
   ]
 }
