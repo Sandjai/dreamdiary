@@ -22,7 +22,7 @@ export const Sidebar = ({ className, onClick, isOpen }) => {
   }, [activeMonth]);
 
   return (
-    <div className={classnames(className, styles.sidebar)}>
+    <aside className={classnames(className, styles.sidebar)}>
       <div onClick={onClick} className={styles.burgerIcon}>
         <img alt="Burger Icon" src={BurgerIcon}></img>
       </div>
@@ -36,6 +36,6 @@ export const Sidebar = ({ className, onClick, isOpen }) => {
         activeMonth={activeMonth}
         setActiveMonth={setActiveMonth}
       ></Tags>
-    </div>
+    </aside>
   );
 };
