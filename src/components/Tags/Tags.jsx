@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectDate, selectDreamsIDs } from "../../store/calendar/selectors";
-import { Button } from "../Button/Button";
+import { Button_custom } from "../Button/Button";
 import { monthsInRU, SIZES } from "../../constants/ui";
 import { dreamType } from "../../constants/ui";
 
@@ -69,33 +69,33 @@ export const Tags = ({ className, activeMonth, setActiveMonth }) => {
           <time>{"(" + new Date(activeMonth).getFullYear() + " год)"}</time>:
         </h3>
 
-        <Button
+        <Button_custom variant="outlined"
           size={SIZES.s}
-          onClick={() => navigate("dream/filter?type=prophetic")}
+          color="green"  onClick={() => navigate("dream/filter?type=prophetic")}
         >
           Вещий сон: <b> {type_prophetic} </b>
-        </Button>
-        <Button
+        </Button_custom>
+        <Button_custom variant="outlined"
           size={SIZES.s}
-          onClick={() => navigate("dream/filter?type=nightmare")}
+          color="green"  onClick={() => navigate("dream/filter?type=nightmare")}
         >
           Кошмар: <b> {type_nightmare}</b>
-        </Button>
-        <Button
+        </Button_custom>
+        <Button_custom variant="outlined"
           size={SIZES.s}
-          onClick={() => navigate("dream/filter?type=lucid")}
+          color="green"  onClick={() => navigate("dream/filter?type=lucid")}
         >
           Люцидник: <b> {type_lucid} </b>
-        </Button>
-        <Button
+        </Button_custom>
+        <Button_custom variant="outlined"
           size={SIZES.s}
-          onClick={() => navigate("dream/filter?type=simple")}
+          color="green"  onClick={() => navigate("dream/filter?type=simple")}
         >
           Обычный сон: <b> {type_simple}</b>
-        </Button>
-        <Button size={SIZES.s} onClick={() => navigate("dream/filter?type=os")}>
+        </Button_custom>
+        <Button_custom  variant="outlined" size={SIZES.s} color="green" onClick={() => navigate("dream/filter?type=os")}>
           Осознанный сон: <b> {type_os}</b>
-        </Button>
+        </Button_custom>
       </div>
       <div>
         <br></br>

@@ -1,4 +1,4 @@
-import { Button } from "../../components/Button/Button";
+import { Button_custom } from "../../components/Button/Button";
 import { Footer } from "../../components/Footer/Footer";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { Outlet, useParams } from "react-router-dom";
@@ -31,14 +31,15 @@ export const MainPage = () => {
           <div className="marTopLrg">
             <h3>Выбери сон или создай новый</h3>
 
-            <Button
+            <Button_custom
               onClick={() => {
                 navigate(`/date/${datestring}/dream/newDream`);
               }}
+              color="green"
               type="roundBtn"
             >
-              {" "}
-            </Button>
+                + Добавить сон
+            </Button_custom>
           </div>
         </section>
       );

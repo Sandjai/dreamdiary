@@ -34,8 +34,18 @@ h3 {
 }
 
 .burgerIcon {
-  text-align: right;
+  text-align: center;
   cursor: pointer;
+
+}
+
+.burgerIcon svg {
+  font-size: 30px;
+  fill: var(--dark-green);
+
+}
+.burgerIcon_open {
+  text-align: right!important;
 }
 
 .burgerIcon img {

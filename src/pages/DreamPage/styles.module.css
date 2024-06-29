@@ -39,20 +39,15 @@ h2 {
 }
 
 .mainBtn {
-  margin: 8rem auto;
-  background-color: var(--white) !important;
-  opacity: 0.75;
-  transition: opacity linear 0.3s;
-  color: var(--white);
-  border: 3px solid var(--dark-green) !important;
-  color: var(--dark-green);
-  height: 4rem !important;
+
+
+  margin-left: auto!important;
+  margin-right: auto!important;
+  max-width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
 }
-.mainBtn:hover {
-  opacity: 1;
-  background-color: var(--dark-green) !important;
-  color: var(--white) !important;
-}
+
 
 .hero {
   height: auto;

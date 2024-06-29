@@ -1,7 +1,7 @@
 export const SIZES = {
-  l: "l",
-  m: "m",
-  s: "s",
+  l: "large",
+  m: "medium",
+  s: "small",
 };
 
 export const monthsInRU = [
@@ -37,6 +37,7 @@ export const dreamType = (type) => {
 };
 
 export const dreamTypeCF = (type) => {
+  console.log(type);
   switch (type) {
     case "prophetic":
       return "Вещий сон";

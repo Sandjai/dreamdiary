@@ -9,7 +9,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDreamsIfNotExist } from "../../store/calendar/middlewares/loadDreamsIfNotExist.js";
 import { formatDate } from "../../utils/formatDate.js";
-import BurgerIcon from "../../images/Hamburger_menu.png";
+// import BurgerIcon from "../../images/Hamburger_menu.png";
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import MenuIcon from '@mui/icons-material/Menu';
 import classNames from "classnames";
 
 export const Sidebar = ({ className, onClick, isOpen }) => {
@@ -22,9 +24,9 @@ export const Sidebar = ({ className, onClick, isOpen }) => {
   }, [activeMonth]);
 
   return (
-    <aside className={classnames(className, styles.sidebar)}>
-      <div onClick={onClick} className={styles.burgerIcon}>
-        <img alt="Burger Icon" src={BurgerIcon}></img>
+    <div className={classnames(className, styles.sidebar)}>
+      <div onClick={onClick} className={classNames(styles.burgerIcon, {[styles.burgerIcon_open] : isOpen })}>
+          {isOpen ?  <MenuOpenIcon></MenuOpenIcon> : <MenuIcon></MenuIcon>}
       </div>
       <Calendar
         activeMonth={activeMonth}
@@ -36,6 +38,6 @@ export const Sidebar = ({ className, onClick, isOpen }) => {
         activeMonth={activeMonth}
         setActiveMonth={setActiveMonth}
       ></Tags>
-    </aside>
+    </div>
   );
 };

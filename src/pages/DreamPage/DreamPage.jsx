@@ -7,7 +7,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { formatDate } from "../../utils/formatDate";
-import { Button } from "../../components/Button/Button";
+import { Button_custom } from "../../components/Button/Button";
 import { SIZES } from "../../constants/ui";
 import { DreamTabs } from "../../components/DreamTabs/DreamTabs";
 import { Header } from "../../components/Header/Header";
@@ -77,7 +77,7 @@ export const DreamPage = () => {
               )}
             </div>
           </div>
-          <Button
+          <Button_custom
             onClick={() => {
               navigate(`/date/${datestring}/dream/newDream`);
             }}
@@ -85,7 +85,7 @@ export const DreamPage = () => {
             className={styles.mainBtn}
           >
             + Добавить сон
-          </Button>
+          </Button_custom>
         </div>
       </section>
     </>

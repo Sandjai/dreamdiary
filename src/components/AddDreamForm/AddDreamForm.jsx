@@ -12,7 +12,7 @@ import { formatDate } from "../../utils/formatDate";
 import styles from "./styles.module.css";
 import { useDispatch } from "react-redux";
 import { TagsSlice } from "../../store/tags";
-import { Button } from "../Button/Button";
+import { Button_custom } from "../Button/Button";
 import { SIZES } from "../../constants/ui";
 import { useParams } from "react-router-dom";
 import { NotificationSlice } from "../../store/notification";
@@ -97,9 +97,9 @@ export const AddDreamForm = ({ className }) => {
           />
           <CustomTextarea label="Описание сна" name="description" />
 
-          <button type="submit" size={SIZES.m}>
+          <Button_custom type="submit" size={SIZES.m}>
             Отправить
-          </button>
+          </Button_custom>
         </Form>
       </Formik>
     </div>

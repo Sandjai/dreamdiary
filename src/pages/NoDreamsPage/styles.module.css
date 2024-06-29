@@ -39,3 +39,11 @@ h2 {
 p {
   color: var(--grey);
 }
+
+.custButton {
+  margin-left: auto!important;
+  margin-right: auto!important;
+  max-width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
+}
